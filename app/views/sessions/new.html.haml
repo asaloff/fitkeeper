@@ -5,3 +5,8 @@
     = f.text_field :username
     = f.password_field :password
     = f.submit 'Sign In', class: 'col-sm-offset-4 btn btn-default'
+    %br
+    %br
+    %span.col-sm-offset-4
+      Don't have an account? 
+      = link_to "Register Here", register_path

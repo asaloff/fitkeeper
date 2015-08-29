@@ -1,0 +1,14 @@
+%h3
+  Register
+.col-sm-8.well.center
+  = bootstrap_form_for @user, layout: :horizontal, label_col: "col-sm-3 col-sm-offset-1", control_col: "col-sm-6", method: 'post' do |f|
+    = f.text_field :full_name, label: "Full Name"
+    = f.text_field :username
+    = f.password_field :password
+    = f.password_field :password_confirmation, label: "Confirm Password"
+    = f.submit 'Register', class: 'col-sm-offset-4 btn btn-default'
+    %br
+    %br
+    %span.col-sm-offset-4
+      Already a Member? 
+      = link_to "Login Here", login_path

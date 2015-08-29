@@ -11,7 +11,7 @@ class ExercisesController < ApplicationController
   end
 
   def create
-    @exercise = Exercise.create(exercise_params)
+    @exercise = Exercise.new(exercise_params)
     @exercise.user = current_user
 
     if @exercise.save

@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   get '/home', to: 'exercises#index'
 
+  get '/register', to: 'users#new'
+
+  resources :users, only: [:create]
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
