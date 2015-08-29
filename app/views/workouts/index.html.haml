@@ -1,0 +1,11 @@
+%h3
+  Workouts
+.col-sm-10.well.center
+  - @workouts.each do |workout|
+    .workout.clearfix
+      %h4
+        = workout.name.titleize
+      = link_to "Edit", edit_workout_path(workout), class: "btn btn-warning"
+      = link_to "Start Workout", workout_path(workout), class: "btn btn-success start"
+    - unless workout == @workouts.last
+      %hr

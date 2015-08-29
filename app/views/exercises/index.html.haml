@@ -1,0 +1,11 @@
+%h3
+  Current Status
+.col-sm-10.well.center
+  %dl.dl-horizontal
+    - @exercises.each do |exercise|
+      %dt
+        = exercise.name.titleize + ":"
+      %dd
+        = exercise.display_current_exercise_status
+        = link_to "Edit", edit_exercise_path(exercise), class: "edit"
+      %br

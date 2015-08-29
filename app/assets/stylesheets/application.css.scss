@@ -1,0 +1,99 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require multi-select
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  background-color: #F0F0F5;
+}
+
+.navbar {
+  border-radius: 0;
+}
+
+.center {
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+h3 {
+  margin-left: 20px;
+  text-align: center;
+}
+
+dd {
+  max-width: 275px;
+  position: relative;
+}
+
+.edit {
+  position: absolute;
+  right: 0px;
+}
+
+.alert {
+  padding: 7px;
+}
+
+#flash {
+  clear: both;
+}
+
+.workout {
+  padding: 5px;
+}
+
+.workout h4 {
+  float: left;
+}
+
+.submit {
+  margin-right: 10px;
+}
+
+.single-exercise .col-sm-1 {
+  padding-left: 0;
+}
+
+.form-group.single-exercise {
+  position: relative;
+}
+
+.single-exercise .btn, .single-exercise img {
+  position: absolute;
+  right: 0;
+}
+
+@media (max-width: 767px) {
+  .single-exercise .btn, .single-exercise img {
+    position: relative;
+  }
+}
+
+.workout .btn {
+  float: right;
+  margin-top: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+

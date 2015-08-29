@@ -1,0 +1,6 @@
+- if obj.errors.any?
+  .alert.alert-danger.col-sm-10.center
+    %h5 The following errors occured:
+    %ul
+      - obj.errors.full_messages.each do |message|
+        %li= message

@@ -1,0 +1,68 @@
+%h3
+  Add Exercise
+.col-sm-10.well.center.clearfix
+  %form.form-horizontal
+    .form-group
+      %label.col-sm-3.col-sm-offset-2.control-label
+        Exercise Name:
+      .col-sm-5
+        %input.form-control
+    .form-group
+      %label.col-sm-3.col-sm-offset-2.control-label
+        Weight:
+      .col-sm-2
+        %select.form-control
+          %option
+          %option 1
+          %option 3
+          %option 5
+          %option 10
+          %option 15
+          %option 20
+          %option 25
+          %option 30
+          %option 35
+          %option 40
+          %option 45
+          %option 50
+    .form-group
+      %label.col-sm-3.col-sm-offset-2.control-label
+        Time:
+      .col-sm-2
+        %select.form-control
+          %option
+          - (1..60).each do |num|
+            %option 
+              = num
+      .col-sm-2
+        %select.form-control
+          %option
+          %option Seconds
+          %option Minutes
+    .form-group
+      %label.col-sm-3.col-sm-offset-2.control-label
+        Sets:
+      .col-sm-2
+        %select.form-control
+          %option
+          - (1..60).each do |num|
+            %option 
+              = num
+    .form-group
+      %label.col-sm-3.col-sm-offset-2.control-label
+        Reps:
+      .col-sm-2
+        %select.form-control
+          %option
+          - (1..60).each do |num|
+            %option 
+              = num
+    .col-sm-10.col-sm-offset-5.buttons
+      %button.btn.btn-success.submit{type: "submit"}
+        Create
+      %a.btn.btn-danger
+        Cancel
+
+
+
+

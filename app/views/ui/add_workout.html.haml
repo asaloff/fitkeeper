@@ -1,0 +1,27 @@
+%h3
+  Add Workout
+.col-sm-10.well.center.clearfix
+  %form.form-horizontal
+    .form-group
+      %label.col-sm-3.col-sm-offset-2.control-label
+        Workout Name:
+      .col-sm-5
+        %input.form-control
+    .form-group
+      %label.col-sm-3.col-sm-offset-2.control-label
+        Exercises:
+      .col-sm-5
+        %select#exercise-options.form-control{:multiple => "multiple"}
+          %option Deadlifts
+          %option Squats
+          %option Pullups
+          %option Planks
+          %option Leglifts
+          %option Curls
+      .col-sm-10.col-sm-offset-5.buttons
+        %button.btn.btn-success.submit{type: "submit"}
+          Add
+        %a.btn.btn-warning.submit
+          Cancel
+        %a.btn.btn-danger
+          Delete

@@ -1,0 +1,31 @@
+%h3
+  Add Exercise
+-if @exercise.errors.any?
+  = render "shared/display_errors", obj: @exercise
+= form_for @exercise, html: { class: "form-horizontal" } do |f|
+  .col-sm-10.well.center.clearfix
+    .form-group
+      = f.label :name, "Exercise Name:", class: "col-sm-3 col-sm-offset-2 control-label"
+      .col-sm-5
+        = f.text_field :name, class: "form-control"
+    .form-group
+      = f.label :weight, "Weight:", class: "col-sm-3 col-sm-offset-2 control-label"
+      .col-sm-2
+        = select :exercise, :weight, options_for_every_five_to_hundred(@exercise), {include_blank: true}, { class: "form-control" }
+    .form-group
+      = f.label :time, "Time:", class: "col-sm-3 col-sm-offset-2 control-label"
+      .col-sm-2
+        = select :exercise, :time, options_for_one_through_sixty(@exercise), {include_blank: true}, { class: "form-control" }
+      .col-sm-2
+        = select :exercise, :time_type, options_for_time_type, {include_blank: true}, { class: "form-control" }
+    .form-group
+      = f.label :sets, "Sets:", class: "col-sm-3 col-sm-offset-2 control-label"
+      .col-sm-2
+        = select :exercise, :sets, options_for_one_through_fifteen(@exercise), {include_blank: true}, { class: "form-control" }
+    .form-group
+      = f.label :reps, "Reps:", class: "col-sm-3 col-sm-offset-2 control-label"
+      .col-sm-2
+        = select :exercise, :reps, options_for_one_through_fifteen(@exercise), {include_blank: true}, { class: "form-control" }
+    .col-sm-10.col-sm-offset-5.buttons
+      = f.submit "Create", class: "btn btn-success"
+      = link_to "Cancel", :back, class: "btn btn-danger"

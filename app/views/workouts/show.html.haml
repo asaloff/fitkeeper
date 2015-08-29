@@ -1,0 +1,44 @@
+%h3
+  = @workout.name.titleize
+= form_tag update_multiple_exercises_path, class: 'form-horizontal' do
+  .col-sm-10.well.center.clearfix
+    - @workout.exercises.each do |exercise|  
+      .form-group.single-exercise.col-sm-12
+        = hidden_field_tag "exercises[][id]", exercise.id
+        = label_tag exercise.name, nil,class: "col-sm-1 col-sm-offset-1 control-label"
+        - if exercise.weight
+          .col-sm-1
+            = select_tag "exercises[][weight]", options_for_every_five_to_hundred(exercise), class: "form-control"
+          .col-sm-1
+            %p LBS
+        - if exercise.time
+          .col-sm-1
+            = select_tag "exercises[][time]", options_for_one_through_sixty(exercise), class: "form-control"
+          .col-sm-1
+            = exercise.time_type
+        - if exercise.sets
+          .col-sm-1
+            = select_tag "exercises[][sets]", options_for_one_through_fifteen(exercise), class: "form-control"
+          .col-sm-1
+            %p SETS
+        - if exercise.reps
+          .col-sm-1
+            = select_tag "exercises[][reps]", options_for_one_through_fifteen(exercise), class: "form-control"
+          .col-sm-1
+            %p REPS
+        = image_tag("check.png", id: "check_#{exercise.id}")
+        %a.btn.btn-success{ id: "button_#{exercise.id}" }
+          Done!
+        :javascript
+          $(document).ready(function() {
+            $("check_#{exercise.id}").hide();
+          });
+          $(document).ready(function() {
+            $("#button_#{exercise.id}").click(function(){
+              $(this).hide();
+              $("check_#{exercise.id}").show();
+            });
+          });
+  .col-sm-10.col-sm-offset-5
+    = submit_tag "Workout Complete!", class: "btn btn-success submit"
+    = link_to "Cancel", :back, class: "btn btn-danger"
