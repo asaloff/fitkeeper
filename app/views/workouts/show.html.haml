@@ -5,26 +5,26 @@
     - @workout.exercises.each do |exercise|  
       .form-group.single-exercise.col-sm-12
         = hidden_field_tag "exercises[][id]", exercise.id
-        = label_tag exercise.name, nil,class: "col-sm-1 col-sm-offset-1 control-label"
+        = label_tag exercise.name, nil,class: "col-sm-1 control-label"
         - if exercise.weight
-          .col-sm-1
+          .col-sm-2
             = select_tag "exercises[][weight]", options_for_every_five_to_hundred(exercise), class: "form-control"
-          .col-sm-1
+          .col-sm-1.exercise-label
             %p LBS
         - if exercise.time
-          .col-sm-1
+          .col-sm-2
             = select_tag "exercises[][time]", options_for_one_through_sixty(exercise), class: "form-control"
-          .col-sm-1
+          .col-sm-1.exercise-label
             = exercise.time_type
         - if exercise.sets
-          .col-sm-1
+          .col-sm-2
             = select_tag "exercises[][sets]", options_for_one_through_fifteen(exercise), class: "form-control"
-          .col-sm-1
+          .col-sm-1.exercise-label
             %p SETS
         - if exercise.reps
-          .col-sm-1
+          .col-sm-2
             = select_tag "exercises[][reps]", options_for_one_through_fifteen(exercise), class: "form-control"
-          .col-sm-1
+          .col-sm-1.exercise-label
             %p REPS
         = image_tag("check.png", id: "check_#{exercise.id}")
         %a.btn.btn-success{ id: "button_#{exercise.id}" }

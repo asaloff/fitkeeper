@@ -2,10 +2,8 @@ require 'rails_helper'
 
 describe ExercisesController do
   describe 'GET index' do
-    it "redirects to sign in page for unauthenticated users" do
-      clear_current_user
-      get :index
-      expect(response).to redirect_to login_path
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :index}
     end
 
     it "sets the @exercises to all the current users exercises" do

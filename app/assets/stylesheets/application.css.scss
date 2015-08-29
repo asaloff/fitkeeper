@@ -20,6 +20,7 @@
 
 body {
   background-color: #F0F0F5;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -67,6 +68,10 @@ dd {
   margin-right: 10px;
 }
 
+.exercise-label {
+  padding: 5px 0 0 5px;
+}
+
 .single-exercise .col-sm-1 {
   padding-left: 0;
 }
@@ -83,6 +88,9 @@ dd {
 @media (max-width: 767px) {
   .single-exercise .btn, .single-exercise img {
     position: relative;
+  }
+  .single-exercise .col-sm-2 {
+    padding-left: 0;
   }
 }
 

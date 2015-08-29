@@ -4,10 +4,8 @@ describe WorkoutsController do
   describe 'GET index' do
    before { set_current_user }
 
-    it "redirects to the sign in page for unauthenticated users" do
-      clear_current_user
-      get :index
-      expect(response).to redirect_to login_path
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :index }
     end
 
     it "sets @workouts to all of the current user's workouts" do
@@ -22,15 +20,26 @@ describe WorkoutsController do
     before { set_current_user }
     let(:workout) { Fabricate(:workout) }
 
-     it "redirects to the sign in page for unauthenticated users" do
-      clear_current_user
-      get :show, id: workout.id
-      expect(response).to redirect_to login_path
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :show, id: workout.id }
     end
 
     it "sets the @workout variable" do
       get :show, id: workout.id
       expect(assigns(:workout)).to eq workout
+    end
+  end
+
+  describe 'GET new' do
+    before { set_current_user }
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :new }
+    end
+
+    it 'sets the @workout variable' do
+      get :new
+      expect(assigns(:workout)).to be_a Workout
     end
   end
 end
