@@ -111,6 +111,67 @@ describe WorkoutsController do
   end
 
   describe 'PUT update' do
-    # do in morning
+    before { set_current_user }
+    let(:workout) { Fabricate(:workout) }
+    let(:exercise1) { Fabricate(:exercise) }
+    let(:exercise2) { Fabricate(:exercise) }
+    let(:exercise3) { Fabricate(:exercise) }
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { put :update, id: workout.id }
+    end
+
+    context 'with valid inputs' do
+      before do
+        workout.exercises << exercise3
+        put :update, id: workout.id, workout: { name: workout.name, exercises: [exercise1.id, exercise2.id] } 
+      end
+
+      it 'redirects to the workouts page' do
+        expect(response).to redirect_to workouts_path
+      end
+
+      it 'adds the new exercises and removes the unselected exercises from the workout' do
+        expect(workout.exercises.size).to eq(2)
+      end
+
+      it 'sets the flash' do
+        expect(flash["notice"]).to eq "#{workout.name.titleize} was edited successfully"
+      end
+    end
+
+    context 'with invalid inputs' do
+      before { put :update, id: workout.id, workout: { name: "", exercises: [exercise1.id, exercise2.id] }  }
+
+      specify { should render_template(:edit) }
+
+      it 'does not update the workout' do
+        expect(workout.exercises.size).to eq(0) 
+      end
+    end
+  end
+
+  describe 'DELETE destroy' do
+    let(:workout) { Fabricate(:workout) }
+    before do 
+      set_current_user
+      delete :destroy, id: workout.id
+    end
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { delete :destroy, id: workout.id }
+    end
+
+    it 'redirects to the workouts page' do
+      expect(response).to redirect_to workouts_path
+    end
+
+    it 'sets the @workout variable' do
+      expect(assigns(:workout)).to eq workout
+    end
+
+    it 'deletes the workout' do
+      expect(Workout.all.size).to eq(0)
+    end
   end
 end

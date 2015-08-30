@@ -43,6 +43,10 @@ dd {
   position: relative;
 }
 
+.dl-horizontal {
+  margin-bottom: 0;
+}
+
 .edit {
   position: absolute;
   right: 0px;
@@ -101,11 +105,25 @@ dd {
   margin-bottom: 5px;
 }
 
+.success-buttons {
+  text-align: center;
+}
+
+.success-buttons a {
+  margin-bottom: 10px;
+}
+
 .buttons {
   margin-top: 10px;
 }
 
 .col-sm-6 {
   padding-left: 5px;
+}
+
+.obj-empty-text {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
 }
 

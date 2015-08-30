@@ -1,6 +1,12 @@
 %h3
-  Current Status
+  = "#{current_user.full_name.titleize}'s Exercises"
 .col-sm-10.well.center
+  -if @exercises.empty?
+    .obj-empty-text
+      %h4
+        You don't have any exercises yet.
+      %p
+        To add an exercise, select New and then Exercise in the navigation up top.
   %dl.dl-horizontal
     - @exercises.each do |exercise|
       %dt
@@ -8,4 +14,5 @@
       %dd
         = exercise.display_current_exercise_status
         = link_to "Edit", edit_exercise_path(exercise), class: "edit"
-      %br
+      - unless exercise == @exercises.last
+        %br

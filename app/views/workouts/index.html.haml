@@ -1,6 +1,12 @@
 %h3
-  Workouts
+  = "#{current_user.full_name.titleize}'s Workouts"
 .col-sm-10.well.center
+  -if @workouts.empty?
+    .obj-empty-text
+      %h4
+        You don't have any workouts yet.
+      %p
+        To add a workout, select New and then Workout in the navigation up top. Be sure to add exercises first so that you can add the exercises to the workout.
   - @workouts.each do |workout|
     .workout.clearfix
       %h4

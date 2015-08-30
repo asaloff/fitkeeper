@@ -19,13 +19,13 @@ class Exercise < ActiveRecord::Base
 
   def display_current_exercise_status
     string = ''
-    string << weight.to_s + ' lbs' if weight
+    string << weight.to_s + ' LBS' if weight
     string << ', ' if (!string.empty?)  && (!string.strip.end_with?(',')) && (time || sets || reps)
     string << time.to_s + ' ' + time_type if time
     string << ', ' if !string.empty? && !string.strip.end_with?(',') && (sets || reps)
-    string << sets.to_s + ' sets' if sets
+    string << sets.to_s + ' Sets' if sets
     string << ', ' if !string.empty?  && !string.strip.end_with?(',') && (reps)
-    string << reps.to_s + ' reps' if reps
+    string << reps.to_s + ' Reps' if reps
     string
   end
 end

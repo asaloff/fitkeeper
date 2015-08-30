@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root to: 'exercises#index'
+  root to: 'workouts#index'
   get 'ui(/:action)', controller: 'ui'
 
-  get '/home', to: 'exercises#index'
+  get '/home', to: 'workouts#index'
 
   get '/register', to: 'users#new'
 
@@ -22,5 +22,4 @@ Rails.application.routes.draw do
   end
 
   resources :workouts
-  # , :index, :show, :edit, :update
 end

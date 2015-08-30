@@ -1,6 +1,8 @@
 .col-sm-10.well.center.clearfix
-  = bootstrap_form_for @workout, layout: :horizontal, label_col: "col-sm-3 col-sm-offset-1", control_col: "col-sm-6", method: 'post' do |f|
+  = bootstrap_form_for @workout, layout: :horizontal, label_col: "col-sm-3 col-sm-offset-1", control_col: "col-sm-6" do |f|
     = f.text_field :name, label: "Workout Name"
     = f.collection_select :exercises, current_user.exercises.all, :id, :name, {include_blank: false, selected: @workout.exercises.map(&:id)}, { multiple: true, id: "exercise-options" }
     = f.submit submit_type, class: "btn btn-success col-sm-offset-4"
-    = link_to "Cancel", :back, class: "btn btn-danger"
+    -if cancel_or_delete == "delete"
+      = link_to "Delete", workout_path(@workout), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }, class: "btn btn-danger"
+    = link_to "Cancel", :back, class: "btn btn-warning"
