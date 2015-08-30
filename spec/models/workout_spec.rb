@@ -5,4 +5,5 @@ describe Workout do
   it { should have_and_belong_to_many :exercises }
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of :name }
+  it { should validate_presence_of :user }
 end

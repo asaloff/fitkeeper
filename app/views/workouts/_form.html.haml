@@ -1,7 +1,6 @@
 .col-sm-10.well.center.clearfix
   = bootstrap_form_for @workout, layout: :horizontal, label_col: "col-sm-3 col-sm-offset-1", control_col: "col-sm-6", method: 'post' do |f|
     = f.text_field :name, label: "Workout Name"
-    = f.collection_select :exercises, Exercise.all.each, :id, :name, {include_blank: false}, { :multiple => true, id: "exercise-options" }
+    = f.collection_select :exercises, current_user.exercises.all, :id, :name, {include_blank: false, selected: @workout.exercises.map(&:id)}, { multiple: true, id: "exercise-options" }
     = f.submit submit_type, class: "btn btn-success col-sm-offset-4"
-    %a.btn.btn-danger.submit
-      Cancel
+    = link_to "Cancel", :back, class: "btn btn-danger"

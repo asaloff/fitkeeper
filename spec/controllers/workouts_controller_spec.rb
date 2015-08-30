@@ -95,4 +95,22 @@ describe WorkoutsController do
       end
     end
   end
+
+  describe 'GET edit' do
+    before { set_current_user }
+    let(:workout) { Fabricate(:workout) }
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :edit, id: workout.id }
+    end
+
+    it 'sets the @workout variable to the selected workout' do
+      get :edit, id: workout.id
+      expect(assigns(:workout)).to eq workout
+    end
+  end
+
+  describe 'PUT update' do
+    # do in morning
+  end
 end
