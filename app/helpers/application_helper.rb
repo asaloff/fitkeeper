@@ -1,6 +1,6 @@
 module ApplicationHelper
   def options_for_weight(exercise)
-    options_for_select((1..100).select { |n| n % 5 == 0 }.map(&:to_s), exercise.weight.to_s)
+    options_for_select((1..300).select { |n| n % 5 == 0 }.map(&:to_s), exercise.weight.to_s)
   end
 
   def options_for_time(exercise)
