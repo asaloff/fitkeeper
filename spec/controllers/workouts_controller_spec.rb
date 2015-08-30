@@ -32,9 +32,16 @@ describe WorkoutsController do
 
   describe 'GET new' do
     before { set_current_user }
+    let(:exercise) { Fabricate(:exercise, user: current_user) }
 
     it_behaves_like "require_sign_in" do
       let(:action) { get :new }
+    end
+
+    it "redirects to the exercise required page if the user has no exercises" do
+      exercise.destroy
+      get :new
+      expect(response).to redirect_to exercise_required_path
     end
 
     it 'sets the @workout variable' do

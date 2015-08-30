@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get '/workout_complete', to: 'pages#workout_complete'
   get '/exercise_created_success', to: 'pages#exercise_created_success'
+  get '/exercise_required', to: 'pages#exercise_required'
 
   resources :exercises do
     collection do

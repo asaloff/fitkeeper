@@ -1,0 +1,8 @@
+.obj-empty-text
+  %h3
+    Hold your horses...You don't have any exercises yet...
+  %p
+    Please create some new exercises before creating a new workout.
+  .col-sm-2.center.success-buttons
+    = link_to "New Exercise", new_exercise_path, class: "btn btn-success"
+    = link_to "Cancel", root_path, class: "btn btn-danger"

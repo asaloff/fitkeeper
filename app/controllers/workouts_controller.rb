@@ -11,6 +11,7 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = Workout.new
+    require_exercises
   end
 
   def create
@@ -52,6 +53,12 @@ class WorkoutsController < ApplicationController
 
   def find_workout
     @workout = Workout.find params[:id]
+  end
+
+  def require_exercises
+    if current_user.exercises.empty?
+      redirect_to exercise_required_path
+    end
   end
 
   def put_exercises_into_workout
