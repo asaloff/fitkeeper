@@ -140,26 +140,40 @@ describe ExercisesController do
   end
 
   describe 'POST update_multiple' do
-    let(:workout) { Fabricate(:workout, user: current_user) }
     let(:exercise1) { Fabricate(:exercise, user: current_user, name: "Legs", weight: 5, reps: 10, time: nil, time_type: nil) }
     let(:exercise2) { Fabricate(:exercise, user: current_user, name: "Back", weight: 10, reps: 15, time: nil, time_type: nil) }
+    let(:workout) { Fabricate(:workout, user: current_user, exercises: [exercise1, exercise2]) }
 
-    before do
-      set_current_user
-      workout.exercises << exercise1
-      workout.exercises << exercise2
-      post :update_multiple, "exercises"=> [{id: exercise1.id, name: "Legs", weight: 10, reps: 20}, {id: exercise2.id, name: "Back", weight: 20, reps: 10}]
+    context 'with valid inputs' do
+      before do
+        set_current_user
+        post :update_multiple, "exercises"=> [{id: exercise1.id, name: "Legs", weight: 10, reps: 20}, {id: exercise2.id, name: "Back", weight: 20, reps: 10}]
+      end
+
+      it "redirect to the completed workout page" do
+        expect(response).to redirect_to workout_complete_path
+      end
+
+      it "updates the exercises' parameters" do
+        expect(exercise1.reload.weight).to eq(10)
+        expect(exercise1.reload.reps).to eq(20)
+        expect(exercise2.reload.weight).to eq(20)
+        expect(exercise2.reload.reps).to eq(10)
+      end
     end
 
-    it "redirect to the completed workout page" do
-      expect(response).to redirect_to workout_complete_path
-    end
+    context 'without valid inputs' do
+      before do
+        set_current_user
+        post :update_multiple, "exercises"=> [{id: exercise1.id, name: "Legs", weight: 10, reps: 20}, {id: exercise2.id, name: "Back", weight: "", reps: ""}]
+      end
 
-    it "updates the exercises' parameters" do
-      expect(exercise1.reload.weight).to eq(10)
-      expect(exercise1.reload.reps).to eq(20)
-      expect(exercise2.reload.weight).to eq(20)
-      expect(exercise2.reload.reps).to eq(10)
+      it 'does not update any of the exercises if one exercise does not validate' do
+        expect(exercise1.reload.weight).to eq(5)
+        expect(exercise1.reload.reps).to eq(10)
+        expect(exercise2.reload.weight).to eq(10)
+        expect(exercise2.reload.reps).to eq(15)
+      end
     end
   end
 end

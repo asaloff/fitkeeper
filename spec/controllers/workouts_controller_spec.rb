@@ -62,8 +62,7 @@ describe WorkoutsController do
 
     context 'with valid inputs' do
       before do
-        workout = Fabricate(:workout)
-        workout.exercises << exercise1
+        workout = Fabricate(:workout, exercises: [exercise1])
         post :create, workout: { name: "Leg Day", exercises: [exercise1.id, exercise2.id] } 
       end
 

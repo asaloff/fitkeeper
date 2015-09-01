@@ -2,6 +2,12 @@
   = @workout.name.titleize
 = form_tag update_multiple_exercises_path, class: 'form-horizontal' do
   .col-sm-10.well.center.clearfix
+    -if @workout.exercises.empty?
+      .obj-empty-text
+        %h4
+          = "#{@workout.name.titleize} doesn't have any exercises yet."
+        %p
+          = "To add an exercise to #{@workout.name.titleize}, navigate to workouts and then click edit"
     - @workout.exercises.each do |exercise|  
       = render 'display_exercise', exercise: exercise
   %div.col-sm-10.col-sm-offset-5

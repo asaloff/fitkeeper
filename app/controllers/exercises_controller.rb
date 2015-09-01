@@ -1,6 +1,6 @@
 class ExercisesController < ApplicationController
   before_action :require_user
-  before_action :find_exercise, only: [:edit, :update, :destroy]
+  before_action :find_exercise, only: [:edit, :update, :destroy] 
   
   def index
     @exercises = current_user.exercises
@@ -25,7 +25,7 @@ class ExercisesController < ApplicationController
   end
 
   def update
-    if @exercise.update_attributes(exercise_params) 
+    if @exercise.update(exercise_params) 
       flash["notice"] = @exercise.name.titleize + " was updated successfully"
       redirect_to home_path
     else
@@ -39,13 +39,11 @@ class ExercisesController < ApplicationController
   end
 
   def update_multiple
-    params[:exercises].each do |exercise_data|
-      exercise = Exercise.find(exercise_data["id"])
-      if exercise.user == current_user
-        exercise.update_attributes!(weight: exercise_data["weight"], time: exercise_data["time"], sets: exercise_data["sets"], reps: exercise_data["reps"]) 
-      end
+    begin
+    update_exercises
+    rescue ActiveRecord::RecordInvalid
+      flash["danger"] = "Attributes must be valid"
     end
-
     redirect_to workout_complete_path
   end
 
@@ -57,5 +55,16 @@ class ExercisesController < ApplicationController
 
   def find_exercise
     @exercise = Exercise.find params[:id]
+  end
+
+  def update_exercises
+    ActiveRecord::Base.transaction do
+      params[:exercises].each do |exercise_data|
+        exercise = Exercise.find(exercise_data["id"])
+        if exercise.user == current_user
+          exercise.update!(weight: exercise_data["weight"], time: exercise_data["time"], sets: exercise_data["sets"], reps: exercise_data["reps"]) 
+        end
+      end
+    end
   end
 end

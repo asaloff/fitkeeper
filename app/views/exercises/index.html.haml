@@ -12,7 +12,7 @@
       %dt
         = exercise.name.titleize + ":"
       %dd
-        = exercise.display_current_exercise_status
+        = display_current_exercise_status(exercise)
         = link_to "Edit", edit_exercise_path(exercise), class: "edit"
       - unless exercise == @exercises.last
         %br
